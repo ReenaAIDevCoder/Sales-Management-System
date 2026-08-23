@@ -1,0 +1,138 @@
+{% extends "base.html" %}
+
+{% block title %}
+Regional KPI | Sales Management System
+{% endblock %}
+
+{% block content %}
+
+<div class="page-header">
+
+    <div>
+
+        <h1>Regional KPI</h1>
+
+        <p>
+            Compare sales performance across different regions.
+        </p>
+
+    </div>
+
+</div>
+
+
+<div class="form-card">
+
+    <h2>Regional Performance</h2>
+
+    <br>
+
+    <div style="overflow-x:auto;">
+
+        <table
+            style="
+                width:100%;
+                border-collapse:collapse;
+            "
+        >
+
+            <thead>
+
+                <tr>
+
+                    <th style="padding:12px; text-align:left;">
+                        Region
+                    </th>
+
+                    <th style="padding:12px; text-align:left;">
+                        Sales Representatives
+                    </th>
+
+                    <th style="padding:12px; text-align:left;">
+                        Opportunities
+                    </th>
+
+                    <th style="padding:12px; text-align:left;">
+                        Won Deals
+                    </th>
+
+                    <th style="padding:12px; text-align:left;">
+                        Revenue
+                    </th>
+
+                    <th style="padding:12px; text-align:left;">
+                        Win Rate
+                    </th>
+
+                </tr>
+
+            </thead>
+
+
+            <tbody>
+
+                {% for region in regional_data %}
+
+                <tr>
+
+                    <td style="padding:12px;">
+                        {{ region.region }}
+                    </td>
+
+                    <td style="padding:12px;">
+                        {{ region.sales_reps }}
+                    </td>
+
+                    <td style="padding:12px;">
+                        {{ region.opportunities }}
+                    </td>
+
+                    <td style="padding:12px;">
+                        {{ region.won_deals }}
+                    </td>
+
+                    <td style="padding:12px;">
+
+                        ₹{{ "{:,.2f}".format(
+                            region.revenue or 0
+                        ) }}
+
+                    </td>
+
+                    <td style="padding:12px;">
+
+                        {{ "%.2f"|format(
+                            region.win_rate or 0
+                        ) }}%
+
+                    </td>
+
+                </tr>
+
+                {% else %}
+
+                <tr>
+
+                    <td
+                        colspan="6"
+                        style="
+                            padding:25px;
+                            text-align:center;
+                        "
+                    >
+                        No regional KPI data available.
+                    </td>
+
+                </tr>
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+{% endblock %}

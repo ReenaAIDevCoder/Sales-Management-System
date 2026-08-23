@@ -1,0 +1,182 @@
+{% extends "base.html" %}
+
+{% block title %}
+Win Loss Analysis | Sales Management System
+{% endblock %}
+
+{% block content %}
+
+<div class="page-header">
+
+    <div>
+
+        <h1>Win / Loss Analysis</h1>
+
+        <p>
+            Analyze successful and unsuccessful sales opportunities.
+        </p>
+
+    </div>
+
+</div>
+
+
+<div class="dashboard-grid">
+
+    <div class="dashboard-card">
+
+        <div class="card-title">
+            Total Opportunities
+        </div>
+
+        <div class="card-value">
+            {{ total_opportunities }}
+        </div>
+
+    </div>
+
+
+    <div class="dashboard-card">
+
+        <div class="card-title">
+            Won
+        </div>
+
+        <div class="card-value">
+            {{ won_opportunities }}
+        </div>
+
+    </div>
+
+
+    <div class="dashboard-card">
+
+        <div class="card-title">
+            Lost
+        </div>
+
+        <div class="card-value">
+            {{ lost_opportunities }}
+        </div>
+
+    </div>
+
+
+    <div class="dashboard-card">
+
+        <div class="card-title">
+            Win Rate
+        </div>
+
+        <div class="card-value">
+            {{ "%.2f"|format(win_rate or 0) }}%
+        </div>
+
+    </div>
+
+</div>
+
+
+<div class="form-card">
+
+    <h2>Win / Loss Details</h2>
+
+    <br>
+
+    <div style="overflow-x:auto;">
+
+        <table
+            style="
+                width:100%;
+                border-collapse:collapse;
+            "
+        >
+
+            <thead>
+
+                <tr>
+
+                    <th style="padding:12px; text-align:left;">
+                        Opportunity
+                    </th>
+
+                    <th style="padding:12px; text-align:left;">
+                        Deal Value
+                    </th>
+
+                    <th style="padding:12px; text-align:left;">
+                        Stage
+                    </th>
+
+                    <th style="padding:12px; text-align:left;">
+                        Status
+                    </th>
+
+                    <th style="padding:12px; text-align:left;">
+                        Close Date
+                    </th>
+
+                </tr>
+
+            </thead>
+
+
+            <tbody>
+
+                {% for opportunity in opportunities %}
+
+                <tr>
+
+                    <td style="padding:12px;">
+                        {{ opportunity.name }}
+                    </td>
+
+                    <td style="padding:12px;">
+
+                        ₹{{ "{:,.2f}".format(
+                            opportunity.deal_value or 0
+                        ) }}
+
+                    </td>
+
+                    <td style="padding:12px;">
+                        {{ opportunity.stage }}
+                    </td>
+
+                    <td style="padding:12px;">
+                        {{ opportunity.status }}
+                    </td>
+
+                    <td style="padding:12px;">
+                        {{ opportunity.expected_close_date or "-" }}
+                    </td>
+
+                </tr>
+
+                {% else %}
+
+                <tr>
+
+                    <td
+                        colspan="5"
+                        style="
+                            padding:25px;
+                            text-align:center;
+                        "
+                    >
+                        No closed opportunities found.
+                    </td>
+
+                </tr>
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+{% endblock %}

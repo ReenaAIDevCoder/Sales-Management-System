@@ -1,0 +1,195 @@
+{% extends "base.html" %}
+
+{% block title %}
+Executive Analytics | Sales Management System
+{% endblock %}
+
+{% block content %}
+
+<div class="page-header">
+
+    <div>
+        <h1>Executive Analytics</h1>
+
+        <p>
+            High-level sales and business performance analytics.
+        </p>
+    </div>
+
+</div>
+
+
+<div class="dashboard-grid">
+
+    <div class="dashboard-card">
+
+        <div class="card-title">
+            Total Revenue
+        </div>
+
+        <div class="card-value">
+            ₹{{ "{:,.2f}".format(total_revenue or 0) }}
+        </div>
+
+    </div>
+
+
+    <div class="dashboard-card">
+
+        <div class="card-title">
+            Total Opportunities
+        </div>
+
+        <div class="card-value">
+            {{ total_opportunities }}
+        </div>
+
+    </div>
+
+
+    <div class="dashboard-card">
+
+        <div class="card-title">
+            Won Opportunities
+        </div>
+
+        <div class="card-value">
+            {{ won_opportunities }}
+        </div>
+
+    </div>
+
+
+    <div class="dashboard-card">
+
+        <div class="card-title">
+            Win Rate
+        </div>
+
+        <div class="card-value">
+            {{ "%.2f"|format(win_rate or 0) }}%
+        </div>
+
+    </div>
+
+</div>
+
+
+<div class="form-card">
+
+    <h2>Executive Performance Summary</h2>
+
+    <br>
+
+    <div style="overflow-x:auto;">
+
+        <table
+            style="
+                width:100%;
+                border-collapse:collapse;
+            "
+        >
+
+            <thead>
+
+                <tr>
+
+                    <th style="padding:12px; text-align:left;">
+                        Metric
+                    </th>
+
+                    <th style="padding:12px; text-align:left;">
+                        Value
+                    </th>
+
+                    <th style="padding:12px; text-align:left;">
+                        Description
+                    </th>
+
+                </tr>
+
+            </thead>
+
+
+            <tbody>
+
+                <tr>
+
+                    <td style="padding:12px;">
+                        Total Revenue
+                    </td>
+
+                    <td style="padding:12px;">
+                        ₹{{ "{:,.2f}".format(
+                            total_revenue or 0
+                        ) }}
+                    </td>
+
+                    <td style="padding:12px;">
+                        Revenue generated from won opportunities.
+                    </td>
+
+                </tr>
+
+
+                <tr>
+
+                    <td style="padding:12px;">
+                        Total Opportunities
+                    </td>
+
+                    <td style="padding:12px;">
+                        {{ total_opportunities }}
+                    </td>
+
+                    <td style="padding:12px;">
+                        Total sales opportunities in the system.
+                    </td>
+
+                </tr>
+
+
+                <tr>
+
+                    <td style="padding:12px;">
+                        Won Opportunities
+                    </td>
+
+                    <td style="padding:12px;">
+                        {{ won_opportunities }}
+                    </td>
+
+                    <td style="padding:12px;">
+                        Successfully closed sales opportunities.
+                    </td>
+
+                </tr>
+
+
+                <tr>
+
+                    <td style="padding:12px;">
+                        Win Rate
+                    </td>
+
+                    <td style="padding:12px;">
+                        {{ "%.2f"|format(
+                            win_rate or 0
+                        ) }}%
+                    </td>
+
+                    <td style="padding:12px;">
+                        Percentage of opportunities successfully won.
+                    </td>
+
+                </tr>
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+{% endblock %}
