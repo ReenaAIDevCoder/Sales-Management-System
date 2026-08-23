@@ -1,0 +1,147 @@
+{% extends "base.html" %}
+
+{% block title %}
+Leads | Sales Management System
+{% endblock %}
+
+{% block content %}
+
+<div class="page-header">
+
+    <div>
+        <h1>Leads</h1>
+        <p>Manage and track potential customers.</p>
+    </div>
+
+    <a
+        href="{{ url_for('lead.add_lead') }}"
+        class="btn btn-primary"
+    >
+        + Add Lead
+    </a>
+
+</div>
+
+
+<div class="form-card">
+
+    <div class="form-group">
+
+        <label for="leadSearch">
+            Search Leads
+        </label>
+
+        <input
+            type="text"
+            id="leadSearch"
+            placeholder="Search leads..."
+        >
+
+    </div>
+
+
+    <div style="overflow-x:auto;">
+
+        <table
+            id="leadTable"
+            style="width:100%; border-collapse:collapse;"
+        >
+
+            <thead>
+
+                <tr>
+                    <th>Name</th>
+                    <th>Company</th>
+                    <th>Email</th>
+                    <th>Source</th>
+                    <th>Priority</th>
+                    <th>Value</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                </tr>
+
+            </thead>
+
+
+            <tbody>
+
+                {% for lead in leads %}
+
+                <tr>
+
+                    <td>{{ lead.name }}</td>
+
+                    <td>
+                        {{ lead.company or "-" }}
+                    </td>
+
+                    <td>
+                        {{ lead.email or "-" }}
+                    </td>
+
+                    <td>
+                        {{ lead.source or "-" }}
+                    </td>
+
+                    <td>
+                        {{ lead.priority }}
+                    </td>
+
+                    <td>
+                        ₹{{ "{:,.2f}".format(lead.estimated_value or 0) }}
+                    </td>
+
+                    <td>
+                        {{ lead.status }}
+                    </td>
+
+                    <td>
+
+                        <a
+                            href="{{ url_for(
+                                'lead.lead_detail',
+                                lead_id=lead.id
+                            ) }}"
+                            class="btn btn-primary"
+                        >
+                            View
+                        </a>
+
+                        <a
+                            href="{{ url_for(
+                                'lead.edit_lead',
+                                lead_id=lead.id
+                            ) }}"
+                            class="btn btn-secondary"
+                        >
+                            Edit
+                        </a>
+
+                    </td>
+
+                </tr>
+
+                {% else %}
+
+                <tr>
+
+                    <td
+                        colspan="8"
+                        style="text-align:center; padding:20px;"
+                    >
+                        No leads found.
+                    </td>
+
+                </tr>
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+{% endblock %}

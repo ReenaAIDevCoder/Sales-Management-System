@@ -1,0 +1,174 @@
+{% extends "base.html" %}
+
+{% block title %}
+Lead Details | Sales Management System
+{% endblock %}
+
+{% block content %}
+
+<div class="page-header">
+
+    <div>
+
+        <h1>
+            {{ lead.name }}
+        </h1>
+
+        <p>
+            Lead details and sales information.
+        </p>
+
+    </div>
+
+    <div>
+
+        <a
+            href="{{ url_for(
+                'lead.edit_lead',
+                lead_id=lead.id
+            ) }}"
+            class="btn btn-primary"
+        >
+            Edit Lead
+        </a>
+
+        <a
+            href="{{ url_for(
+                'lead.list_leads'
+            ) }}"
+            class="btn btn-secondary"
+        >
+            Back
+        </a>
+
+    </div>
+
+</div>
+
+
+<div class="form-card">
+
+    <h2>Lead Information</h2>
+
+    <br>
+
+
+    <div class="form-row">
+
+        <div>
+
+            <strong>Name</strong>
+
+            <p>
+                {{ lead.name }}
+            </p>
+
+        </div>
+
+
+        <div>
+
+            <strong>Company</strong>
+
+            <p>
+                {{ lead.company or "-" }}
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <div class="form-row">
+
+        <div>
+
+            <strong>Email</strong>
+
+            <p>
+                {{ lead.email or "-" }}
+            </p>
+
+        </div>
+
+
+        <div>
+
+            <strong>Phone</strong>
+
+            <p>
+                {{ lead.phone or "-" }}
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <div class="form-row">
+
+        <div>
+
+            <strong>Source</strong>
+
+            <p>
+                {{ lead.source or "-" }}
+            </p>
+
+        </div>
+
+
+        <div>
+
+            <strong>Priority</strong>
+
+            <p>
+                {{ lead.priority }}
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <div class="form-row">
+
+        <div>
+
+            <strong>Estimated Value</strong>
+
+            <p>
+                ₹{{ "{:,.2f}".format(
+                    lead.estimated_value or 0
+                ) }}
+            </p>
+
+        </div>
+
+
+        <div>
+
+            <strong>Status</strong>
+
+            <p>
+                {{ lead.status }}
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <div>
+
+        <strong>Created At</strong>
+
+        <p>
+            {{ lead.created_at or "-" }}
+        </p>
+
+    </div>
+
+</div>
+
+{% endblock %}
