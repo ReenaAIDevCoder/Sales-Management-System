@@ -1,0 +1,130 @@
+{% extends "base.html" %}
+
+{% block title %}
+Product Documentation | Sales Management System
+{% endblock %}
+
+{% block content %}
+
+<div class="page-header">
+
+    <div>
+
+        <h1>Product Documentation</h1>
+
+        <p>
+            Manage product documentation and knowledge resources.
+        </p>
+
+    </div>
+
+</div>
+
+
+<div class="form-card">
+
+    <h2>Documentation Library</h2>
+
+    <br>
+
+    <div style="overflow-x:auto;">
+
+        <table
+            style="
+                width:100%;
+                border-collapse:collapse;
+            "
+        >
+
+            <thead>
+
+                <tr>
+
+                    <th style="padding:12px; text-align:left;">
+                        Product
+                    </th>
+
+                    <th style="padding:12px; text-align:left;">
+                        Document Title
+                    </th>
+
+                    <th style="padding:12px; text-align:left;">
+                        Document Type
+                    </th>
+
+                    <th style="padding:12px; text-align:left;">
+                        Version
+                    </th>
+
+                    <th style="padding:12px; text-align:left;">
+                        Updated
+                    </th>
+
+                    <th style="padding:12px; text-align:left;">
+                        Status
+                    </th>
+
+                </tr>
+
+            </thead>
+
+
+            <tbody>
+
+                {% for document in documents %}
+
+                <tr>
+
+                    <td style="padding:12px;">
+                        {{ document.product_id or "-" }}
+                    </td>
+
+                    <td style="padding:12px;">
+                        {{ document.title }}
+                    </td>
+
+                    <td style="padding:12px;">
+                        {{ document.document_type or "-" }}
+                    </td>
+
+                    <td style="padding:12px;">
+                        {{ document.version or "-" }}
+                    </td>
+
+                    <td style="padding:12px;">
+                        {{ document.updated_at or "-" }}
+                    </td>
+
+                    <td style="padding:12px;">
+                        {{ document.status }}
+                    </td>
+
+                </tr>
+
+                {% else %}
+
+                <tr>
+
+                    <td
+                        colspan="6"
+                        style="
+                            padding:25px;
+                            text-align:center;
+                        "
+                    >
+                        No documentation available.
+                    </td>
+
+                </tr>
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+{% endblock %}

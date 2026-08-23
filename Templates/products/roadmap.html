@@ -1,0 +1,178 @@
+{% extends "base.html" %}
+
+{% block title %}
+Product Roadmap | Sales Management System
+{% endblock %}
+
+{% block content %}
+
+<div class="page-header">
+
+    <div>
+
+        <h1>Product Roadmap</h1>
+
+        <p>
+            Track planned product improvements and releases.
+        </p>
+
+    </div>
+
+</div>
+
+
+<div class="dashboard-grid">
+
+    <div class="dashboard-card">
+
+        <div class="card-title">
+            Total Roadmap Items
+        </div>
+
+        <div class="card-value">
+            {{ roadmap_items|length }}
+        </div>
+
+    </div>
+
+
+    <div class="dashboard-card">
+
+        <div class="card-title">
+            Planned
+        </div>
+
+        <div class="card-value">
+            {{ planned_items }}
+        </div>
+
+    </div>
+
+
+    <div class="dashboard-card">
+
+        <div class="card-title">
+            In Progress
+        </div>
+
+        <div class="card-value">
+            {{ in_progress_items }}
+        </div>
+
+    </div>
+
+
+    <div class="dashboard-card">
+
+        <div class="card-title">
+            Completed
+        </div>
+
+        <div class="card-value">
+            {{ completed_items }}
+        </div>
+
+    </div>
+
+</div>
+
+
+<div class="form-card">
+
+    <h2>Roadmap</h2>
+
+    <br>
+
+    <div style="overflow-x:auto;">
+
+        <table
+            style="
+                width:100%;
+                border-collapse:collapse;
+            "
+        >
+
+            <thead>
+
+                <tr>
+
+                    <th style="padding:12px; text-align:left;">
+                        Product
+                    </th>
+
+                    <th style="padding:12px; text-align:left;">
+                        Feature
+                    </th>
+
+                    <th style="padding:12px; text-align:left;">
+                        Priority
+                    </th>
+
+                    <th style="padding:12px; text-align:left;">
+                        Expected Release
+                    </th>
+
+                    <th style="padding:12px; text-align:left;">
+                        Status
+                    </th>
+
+                </tr>
+
+            </thead>
+
+
+            <tbody>
+
+                {% for item in roadmap_items %}
+
+                <tr>
+
+                    <td style="padding:12px;">
+                        {{ item.product_id or "-" }}
+                    </td>
+
+                    <td style="padding:12px;">
+                        {{ item.feature_name }}
+                    </td>
+
+                    <td style="padding:12px;">
+                        {{ item.priority }}
+                    </td>
+
+                    <td style="padding:12px;">
+                        {{ item.expected_release or "-" }}
+                    </td>
+
+                    <td style="padding:12px;">
+                        {{ item.status }}
+                    </td>
+
+                </tr>
+
+                {% else %}
+
+                <tr>
+
+                    <td
+                        colspan="5"
+                        style="
+                            padding:25px;
+                            text-align:center;
+                        "
+                    >
+                        No roadmap items found.
+                    </td>
+
+                </tr>
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+{% endblock %}

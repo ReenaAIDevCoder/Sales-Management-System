@@ -1,0 +1,158 @@
+{% extends "base.html" %}
+
+{% block title %}
+Product Feedback | Sales Management System
+{% endblock %}
+
+{% block content %}
+
+<div class="page-header">
+
+    <div>
+
+        <h1>Product Feedback</h1>
+
+        <p>
+            Review feedback received from customers and users.
+        </p>
+
+    </div>
+
+</div>
+
+
+<div class="dashboard-grid">
+
+    <div class="dashboard-card">
+
+        <div class="card-title">
+            Total Feedback
+        </div>
+
+        <div class="card-value">
+            {{ feedback_list|length }}
+        </div>
+
+    </div>
+
+
+    <div class="dashboard-card">
+
+        <div class="card-title">
+            Average Rating
+        </div>
+
+        <div class="card-value">
+
+            {{ "%.2f"|format(
+                average_rating or 0
+            ) }}/5
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<div class="form-card">
+
+    <h2>Customer Feedback</h2>
+
+    <br>
+
+    <div style="overflow-x:auto;">
+
+        <table
+            style="
+                width:100%;
+                border-collapse:collapse;
+            "
+        >
+
+            <thead>
+
+                <tr>
+
+                    <th style="padding:12px; text-align:left;">
+                        Product
+                    </th>
+
+                    <th style="padding:12px; text-align:left;">
+                        Customer
+                    </th>
+
+                    <th style="padding:12px; text-align:left;">
+                        Rating
+                    </th>
+
+                    <th style="padding:12px; text-align:left;">
+                        Feedback
+                    </th>
+
+                    <th style="padding:12px; text-align:left;">
+                        Status
+                    </th>
+
+                </tr>
+
+            </thead>
+
+
+            <tbody>
+
+                {% for feedback in feedback_list %}
+
+                <tr>
+
+                    <td style="padding:12px;">
+                        {{ feedback.product_id or "-" }}
+                    </td>
+
+                    <td style="padding:12px;">
+                        {{ feedback.customer_id or "-" }}
+                    </td>
+
+                    <td style="padding:12px;">
+
+                        {{ feedback.rating or 0 }}/5
+
+                    </td>
+
+                    <td style="padding:12px;">
+                        {{ feedback.comments or "-" }}
+                    </td>
+
+                    <td style="padding:12px;">
+                        {{ feedback.status }}
+                    </td>
+
+                </tr>
+
+                {% else %}
+
+                <tr>
+
+                    <td
+                        colspan="5"
+                        style="
+                            padding:25px;
+                            text-align:center;
+                        "
+                    >
+                        No product feedback found.
+                    </td>
+
+                </tr>
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+{% endblock %}
