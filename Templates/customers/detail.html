@@ -1,0 +1,189 @@
+{% extends "base.html" %}
+
+{% block title %}
+Customer Details | Sales Management System
+{% endblock %}
+
+{% block content %}
+
+<div class="page-header">
+
+    <div>
+        <h1>{{ customer.name }}</h1>
+        <p>Customer details and contact information.</p>
+    </div>
+
+    <div>
+
+        <a
+            href="{{ url_for(
+                'customer.edit_customer',
+                customer_id=customer.id
+            ) }}"
+            class="btn btn-primary"
+        >
+            Edit Customer
+        </a>
+
+        <a
+            href="{{ url_for('customer.list_customers') }}"
+            class="btn btn-secondary"
+        >
+            Back
+        </a>
+
+    </div>
+
+</div>
+
+
+<div class="form-card">
+
+    <h2>Customer Information</h2>
+
+    <br>
+
+
+    <div class="form-row">
+
+        <div>
+
+            <strong>Name</strong>
+
+            <p>
+                {{ customer.name }}
+            </p>
+
+        </div>
+
+
+        <div>
+
+            <strong>Company</strong>
+
+            <p>
+                {{ customer.company or "-" }}
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <div class="form-row">
+
+        <div>
+
+            <strong>Email</strong>
+
+            <p>
+                {{ customer.email or "-" }}
+            </p>
+
+        </div>
+
+
+        <div>
+
+            <strong>Phone</strong>
+
+            <p>
+                {{ customer.phone or "-" }}
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <div class="form-row">
+
+        <div>
+
+            <strong>City</strong>
+
+            <p>
+                {{ customer.city or "-" }}
+            </p>
+
+        </div>
+
+
+        <div>
+
+            <strong>State</strong>
+
+            <p>
+                {{ customer.state or "-" }}
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <div class="form-row">
+
+        <div>
+
+            <strong>Country</strong>
+
+            <p>
+                {{ customer.country or "-" }}
+            </p>
+
+        </div>
+
+
+        <div>
+
+            <strong>Industry</strong>
+
+            <p>
+                {{ customer.industry or "-" }}
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <div class="form-row">
+
+        <div>
+
+            <strong>Status</strong>
+
+            <p>
+                {{ customer.status }}
+            </p>
+
+        </div>
+
+
+        <div>
+
+            <strong>Created At</strong>
+
+            <p>
+                {{ customer.created_at or "-" }}
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <div>
+
+        <strong>Address</strong>
+
+        <p>
+            {{ customer.address or "-" }}
+        </p>
+
+    </div>
+
+</div>
+
+{% endblock %}

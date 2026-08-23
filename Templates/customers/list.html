@@ -1,0 +1,164 @@
+{% extends "base.html" %}
+
+{% block title %}
+Customers | Sales Management System
+{% endblock %}
+
+{% block content %}
+
+<div class="page-header">
+
+    <div>
+        <h1>Customers</h1>
+        <p>Manage customer contacts and information.</p>
+    </div>
+
+    <a
+        href="{{ url_for('customer.add_customer') }}"
+        class="btn btn-primary"
+    >
+        + Add Customer
+    </a>
+
+</div>
+
+
+<div class="form-card">
+
+    <div class="form-group">
+
+        <label for="customerSearch">
+            Search Customers
+        </label>
+
+        <input
+            type="text"
+            id="customerSearch"
+            placeholder="Search by name, company, email..."
+        >
+
+    </div>
+
+
+    <div style="overflow-x:auto;">
+
+        <table
+            id="customerTable"
+            style="width:100%; border-collapse:collapse;"
+        >
+
+            <thead>
+
+                <tr>
+                    <th style="padding:12px; text-align:left;">
+                        Name
+                    </th>
+
+                    <th style="padding:12px; text-align:left;">
+                        Company
+                    </th>
+
+                    <th style="padding:12px; text-align:left;">
+                        Email
+                    </th>
+
+                    <th style="padding:12px; text-align:left;">
+                        Phone
+                    </th>
+
+                    <th style="padding:12px; text-align:left;">
+                        Industry
+                    </th>
+
+                    <th style="padding:12px; text-align:left;">
+                        Status
+                    </th>
+
+                    <th style="padding:12px; text-align:left;">
+                        Action
+                    </th>
+                </tr>
+
+            </thead>
+
+
+            <tbody>
+
+                {% for customer in customers %}
+
+                <tr>
+
+                    <td style="padding:12px;">
+                        {{ customer.name }}
+                    </td>
+
+                    <td style="padding:12px;">
+                        {{ customer.company or "-" }}
+                    </td>
+
+                    <td style="padding:12px;">
+                        {{ customer.email or "-" }}
+                    </td>
+
+                    <td style="padding:12px;">
+                        {{ customer.phone or "-" }}
+                    </td>
+
+                    <td style="padding:12px;">
+                        {{ customer.industry or "-" }}
+                    </td>
+
+                    <td style="padding:12px;">
+                        {{ customer.status }}
+                    </td>
+
+                    <td style="padding:12px;">
+
+                        <a
+                            href="{{ url_for(
+                                'customer.customer_detail',
+                                customer_id=customer.id
+                            ) }}"
+                            class="btn btn-primary"
+                        >
+                            View
+                        </a>
+
+                        <a
+                            href="{{ url_for(
+                                'customer.edit_customer',
+                                customer_id=customer.id
+                            ) }}"
+                            class="btn btn-secondary"
+                        >
+                            Edit
+                        </a>
+
+                    </td>
+
+                </tr>
+
+                {% else %}
+
+                <tr>
+
+                    <td
+                        colspan="7"
+                        style="padding:20px; text-align:center;"
+                    >
+                        No customers found.
+                    </td>
+
+                </tr>
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+{% endblock %}
