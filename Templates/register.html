@@ -1,0 +1,258 @@
+{% extends "base.html" %}
+
+{% block title %}
+Create Account | Sales Management System
+{% endblock %}
+
+
+{% block content %}
+
+<div class="login-container">
+
+    <div class="login-card">
+
+        <h1>Create Account</h1>
+
+        <p class="login-subtitle">
+            Create your Sales Management account
+        </p>
+
+
+        <!-- Flash Messages -->
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+
+            {% if messages %}
+
+                {% for category, message in messages %}
+
+                    <div class="alert {{ category }}">
+                        {{ message }}
+                    </div>
+
+                {% endfor %}
+
+            {% endif %}
+
+        {% endwith %}
+
+
+        <!-- Registration Form -->
+
+        <form
+            method="POST"
+            action="{{ url_for('auth.register') }}"
+        >
+
+            <!-- Full Name -->
+
+            <div class="form-group">
+
+                <label for="name">
+                    Full Name
+                </label>
+
+                <input
+                    type="text"
+                    id="name"
+                    name="name"
+                    placeholder="Enter your full name"
+                    autocomplete="name"
+                    required
+                >
+
+            </div>
+
+
+            <!-- Email -->
+
+            <div class="form-group">
+
+                <label for="email">
+                    Email
+                </label>
+
+                <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    placeholder="Enter your email"
+                    autocomplete="email"
+                    required
+                >
+
+            </div>
+
+
+            <!-- Role -->
+
+            <div class="form-group">
+
+                <label for="role">
+                    Role
+                </label>
+
+                <select
+                    id="role"
+                    name="role"
+                    required
+                >
+
+                    <option value="Sales Representative">
+                        Sales Representative
+                    </option>
+
+                    <option value="Sales Manager">
+                        Sales Manager
+                    </option>
+
+                    <option value="Account Manager">
+                        Account Manager
+                    </option>
+
+                    <option value="Marketing">
+                        Marketing
+                    </option>
+
+                    <option value="Product Manager">
+                        Product Manager
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <!-- Region -->
+
+            <div class="form-group">
+
+                <label for="region">
+                    Region
+                </label>
+
+                <input
+                    type="text"
+                    id="region"
+                    name="region"
+                    placeholder="Example: North"
+                    autocomplete="address-level1"
+                >
+
+            </div>
+
+
+            <!-- Password -->
+
+            <div class="form-group">
+
+                <label for="password">
+                    Password
+                </label>
+
+                <input
+                    type="password"
+                    id="password"
+                    name="password"
+                    placeholder="Create password"
+                    minlength="6"
+                    autocomplete="new-password"
+                    required
+                >
+
+            </div>
+
+
+            <!-- Confirm Password -->
+
+            <div class="form-group">
+
+                <label for="confirm_password">
+                    Confirm Password
+                </label>
+
+                <input
+                    type="password"
+                    id="confirm_password"
+                    name="confirm_password"
+                    placeholder="Confirm password"
+                    minlength="6"
+                    autocomplete="new-password"
+                    required
+                >
+
+            </div>
+
+
+            <!-- Create Account Button -->
+
+            <button
+                type="submit"
+                class="login-button"
+            >
+                Create Account
+            </button>
+
+        </form>
+
+
+        <!-- Login Link -->
+
+        <div class="auth-links">
+
+            <span>
+                Already have an account?
+            </span>
+
+            <a
+                href="{{ url_for('auth.login') }}"
+                class="auth-link"
+            >
+                Login
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- Login Link Hover -->
+
+<style>
+
+    .auth-links {
+        margin-top: 22px;
+        text-align: center;
+    }
+
+
+    .auth-link {
+        display: inline-block;
+
+        margin-left: 5px;
+
+        color: #16a34a;
+
+        text-decoration: none;
+
+        font-weight: 600;
+
+        transition:
+            color 0.2s ease,
+            transform 0.2s ease;
+    }
+
+
+    .auth-link:hover {
+        color: #15803d;
+
+        text-decoration: underline;
+
+        transform: scale(1.08);
+    }
+
+</style>
+
+{% endblock %}

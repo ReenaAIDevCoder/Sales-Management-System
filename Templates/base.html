@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        {% block title %}
+        Sales Management System
+        {% endblock %}
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/style.css') }}"
+    >
+
+    <link
+    rel="stylesheet"
+    href="{{ url_for('static', filename='css/dashboard.css') }}"
+>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/forms.css') }}"
+    >
+
+    <link
+        rel="stylesheet"
+    href="{{ url_for('static', filename='css/responsive.css') }}"
+>
+</head>
+
+<body>
+    <script
+        src="{{ url_for('static', filename='js/main.js') }}"
+    ></script>
+
+    <script
+        src="{{ url_for('static', filename='js/dashboard.js') }}"
+    ></script>
+
+    <script
+        src="{{ url_for('static', filename='js/customers.js') }}"
+    ></script>
+
+    <script
+        src="{{ url_for('static', filename='js/opportunities.js') }}"
+    ></script>
+
+    <script
+        src="{{ url_for('static', filename='js/charts.js') }}"
+    ></script>
+
+    <header class="topbar">
+
+        <div class="brand">
+            Sales Management System
+        </div>
+
+        {% if session.get('user_id') %}
+        <div class="user-info">
+            <span>
+                {{ session.get('user_name') }}
+            </span>
+
+            <a href="{{ url_for('auth.logout') }}">
+                Logout
+            </a>
+        </div>
+        {% endif %}
+
+    </header>
+
+
+    {% if session.get('user_id') %}
+
+    <aside class="sidebar">
+
+        <a href="{{ url_for('dashboard.dashboard') }}">
+            Dashboard
+        </a>
+
+        <a href="{{ url_for('customer.list_customers') }}">
+            Customers
+        </a>
+
+        <a href="{{ url_for('lead.list_leads') }}">
+            Leads
+        </a>
+
+        <a href="{{ url_for('opportunity.list_opportunities') }}">
+            Opportunities
+        </a>
+
+        <a href="{{ url_for('activity.list_activities') }}">
+            Activities
+        </a>
+
+        <a href="{{ url_for('sales.targets') }}">
+            Sales Targets
+        </a>
+
+        <a href="{{ url_for('sales.performance') }}">
+            Performance
+        </a>
+
+        <a href="{{ url_for('sales.pipeline') }}">
+            Sales Pipeline
+        </a>
+
+        <hr>
+
+        <a href="{{ url_for('manager.team') }}">
+            Manager
+        </a>
+
+        <a href="{{ url_for('account.history') }}">
+            Accounts
+        </a>
+
+        <a href="{{ url_for('marketing.campaigns') }}">
+            Marketing
+        </a>
+
+        <a href="{{ url_for('product.products') }}">
+            Products
+        </a>
+
+        <a href="{{ url_for('executive.analytics') }}">
+            Executive
+        </a>
+
+    </aside>
+
+    {% endif %}
+
+
+    <main
+        class="{% if session.get('user_id') %}main-content{% else %}full-content{% endif %}"
+    >
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+
+            {% if messages %}
+
+                {% for category, message in messages %}
+
+                    <div class="alert {{ category }}">
+                        {{ message }}
+                    </div>
+
+                {% endfor %}
+
+            {% endif %}
+
+        {% endwith %}
+
+
+        {% block content %}
+        {% endblock %}
+
+    </main>
+
+
+    <footer class="footer">
+
+        <p>
+            © 2026 Sales Management System
+        </p>
+
+    </footer>
+
+</body>
+</html>

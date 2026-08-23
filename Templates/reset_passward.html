@@ -1,0 +1,154 @@
+{% extends "base.html" %}
+
+{% block title %}
+Reset Password | Sales Management System
+{% endblock %}
+
+
+{% block content %}
+
+<div class="login-container">
+
+    <div class="login-card">
+
+        <h1>Reset Password</h1>
+
+        <p class="login-subtitle">
+            Create a new password
+        </p>
+
+
+        <!-- Flash Messages -->
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+
+            {% if messages %}
+
+                {% for category, message in messages %}
+
+                    <div class="alert {{ category }}">
+                        {{ message }}
+                    </div>
+
+                {% endfor %}
+
+            {% endif %}
+
+        {% endwith %}
+
+
+        <!-- Reset Password Form -->
+
+        <form
+            method="POST"
+            action="{{ url_for('auth.reset_password', user_id=user.id) }}"
+        >
+
+            <!-- New Password -->
+
+            <div class="form-group">
+
+                <label for="password">
+                    New Password
+                </label>
+
+                <input
+                    type="password"
+                    id="password"
+                    name="password"
+                    placeholder="Enter new password"
+                    minlength="6"
+                    autocomplete="new-password"
+                    required
+                >
+
+            </div>
+
+
+            <!-- Confirm Password -->
+
+            <div class="form-group">
+
+                <label for="confirm_password">
+                    Confirm Password
+                </label>
+
+                <input
+                    type="password"
+                    id="confirm_password"
+                    name="confirm_password"
+                    placeholder="Confirm new password"
+                    minlength="6"
+                    autocomplete="new-password"
+                    required
+                >
+
+            </div>
+
+
+            <!-- Reset Button -->
+
+            <button
+                type="submit"
+                class="login-button"
+            >
+                Reset Password
+            </button>
+
+        </form>
+
+
+        <!-- Back to Login -->
+
+        <div class="auth-links">
+
+            <a
+                href="{{ url_for('auth.login') }}"
+                class="auth-link"
+            >
+                ← Back to Login
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- Link Hover -->
+
+<style>
+
+    .auth-links {
+        margin-top: 22px;
+        text-align: center;
+    }
+
+
+    .auth-link {
+        display: inline-block;
+
+        color: #16a34a;
+
+        text-decoration: none;
+
+        font-weight: 600;
+
+        transition:
+            color 0.2s ease,
+            transform 0.2s ease;
+    }
+
+
+    .auth-link:hover {
+        color: #15803d;
+
+        text-decoration: underline;
+
+        transform: scale(1.08);
+    }
+
+</style>
+
+{% endblock %}

@@ -1,0 +1,231 @@
+{% extends "base.html" %}
+
+{% block title %}
+Dashboard | Sales Management System
+{% endblock %}
+
+
+{% block content %}
+
+<!-- =====================================================
+     PAGE HEADER
+===================================================== -->
+
+<div class="page-header">
+
+    <div>
+
+        <h1>
+            Sales Dashboard
+        </h1>
+
+        <p>
+            Welcome, {{ user_name }}
+        </p>
+
+    </div>
+
+</div>
+
+
+<!-- =====================================================
+     DASHBOARD CARDS
+===================================================== -->
+
+<div class="dashboard-grid">
+
+
+    <!-- Customers -->
+
+    <div class="dashboard-card">
+
+        <div class="card-title">
+            Customers
+        </div>
+
+        <div class="card-value">
+
+            {% if customer_count is defined %}
+                {{ customer_count }}
+            {% else %}
+                0
+            {% endif %}
+
+        </div>
+
+        <a
+            href="{{ url_for('customer.list_customers') }}"
+            class="dashboard-link"
+        >
+            View Customers →
+        </a>
+
+    </div>
+
+
+    <!-- Leads -->
+
+    <div class="dashboard-card">
+
+        <div class="card-title">
+            Leads
+        </div>
+
+        <div class="card-value">
+
+            {% if lead_count is defined %}
+                {{ lead_count }}
+            {% else %}
+                0
+            {% endif %}
+
+        </div>
+
+        <a
+            href="{{ url_for('lead.list_leads') }}"
+            class="dashboard-link"
+        >
+            View Leads →
+        </a>
+
+    </div>
+
+
+    <!-- Opportunities -->
+
+    <div class="dashboard-card">
+
+        <div class="card-title">
+            Opportunities
+        </div>
+
+        <div class="card-value">
+
+            {% if opportunity_count is defined %}
+                {{ opportunity_count }}
+            {% else %}
+                0
+            {% endif %}
+
+        </div>
+
+        <a
+            href="{{ url_for('opportunity.list_opportunities') }}"
+            class="dashboard-link"
+        >
+            View Opportunities →
+        </a>
+
+    </div>
+
+
+    <!-- Sales Pipeline -->
+
+    <div class="dashboard-card">
+
+        <div class="card-title">
+            Sales Pipeline
+        </div>
+
+        <div class="card-value">
+
+            {% if pipeline_value is defined %}
+                ₹{{ "{:,.2f}".format(pipeline_value) }}
+            {% else %}
+                ₹0.00
+            {% endif %}
+
+        </div>
+
+        <a
+            href="{{ url_for('sales.pipeline') }}"
+            class="dashboard-link"
+        >
+            View Pipeline →
+        </a>
+
+    </div>
+
+
+</div>
+
+
+<!-- =====================================================
+     USER ROLE
+===================================================== -->
+
+<div class="dashboard-section">
+
+    <h2>
+        Your Role
+    </h2>
+
+    <p>
+        {{ user_role }}
+    </p>
+
+</div>
+
+
+<!-- =====================================================
+     DASHBOARD LINK HOVER
+===================================================== -->
+
+<style>
+
+    .dashboard-link {
+
+        display: inline-block;
+
+        margin-top: 12px;
+
+        color: #16a34a;
+
+        text-decoration: none;
+
+        font-weight: 600;
+
+        transition:
+            color 0.2s ease,
+            transform 0.2s ease;
+
+    }
+
+
+    .dashboard-link:hover {
+
+        color: #15803d;
+
+        text-decoration: underline;
+
+        transform: scale(1.05);
+
+    }
+
+
+    .dashboard-card {
+
+        transition:
+            transform 0.2s ease,
+            box-shadow 0.2s ease;
+
+    }
+
+
+    .dashboard-card:hover {
+
+        transform: translateY(-4px);
+
+    }
+
+
+    .dashboard-section {
+
+        margin-top: 30px;
+
+    }
+
+</style>
+
+
+{% endblock %}
