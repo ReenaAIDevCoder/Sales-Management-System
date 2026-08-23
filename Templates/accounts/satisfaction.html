@@ -1,0 +1,154 @@
+{% extends "base.html" %}
+
+{% block title %}
+Customer Satisfaction | Sales Management System
+{% endblock %}
+
+{% block content %}
+
+<div class="page-header">
+
+    <div>
+
+        <h1>Customer Satisfaction</h1>
+
+        <p>
+            Monitor customer satisfaction ratings and feedback.
+        </p>
+
+    </div>
+
+</div>
+
+
+<div class="dashboard-grid">
+
+    <div class="dashboard-card">
+
+        <div class="card-title">
+            Total Responses
+        </div>
+
+        <div class="card-value">
+            {{ satisfactions|length }}
+        </div>
+
+    </div>
+
+
+    <div class="dashboard-card">
+
+        <div class="card-title">
+            Average Rating
+        </div>
+
+        <div class="card-value">
+
+            {{ "%.2f"|format(
+                average_rating or 0
+            ) }}/5
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<div class="form-card">
+
+    <h2>Satisfaction Records</h2>
+
+    <br>
+
+    <div style="overflow-x:auto;">
+
+        <table
+            style="
+                width:100%;
+                border-collapse:collapse;
+            "
+        >
+
+            <thead>
+
+                <tr>
+
+                    <th style="padding:12px; text-align:left;">
+                        Customer
+                    </th>
+
+                    <th style="padding:12px; text-align:left;">
+                        Rating
+                    </th>
+
+                    <th style="padding:12px; text-align:left;">
+                        Feedback
+                    </th>
+
+                    <th style="padding:12px; text-align:left;">
+                        Date
+                    </th>
+
+                </tr>
+
+            </thead>
+
+
+            <tbody>
+
+                {% for satisfaction in satisfactions %}
+
+                <tr>
+
+                    <td style="padding:12px;">
+                        {{ satisfaction.customer_id or "-" }}
+                    </td>
+
+                    <td style="padding:12px;">
+
+                        {{ satisfaction.rating or 0 }}/5
+
+                    </td>
+
+                    <td style="padding:12px;">
+
+                        {{ satisfaction.feedback or "-" }}
+
+                    </td>
+
+                    <td style="padding:12px;">
+
+                        {{ satisfaction.created_at or "-" }}
+
+                    </td>
+
+                </tr>
+
+                {% else %}
+
+                <tr>
+
+                    <td
+                        colspan="4"
+                        style="
+                            padding:25px;
+                            text-align:center;
+                        "
+                    >
+                        No satisfaction records found.
+                    </td>
+
+                </tr>
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,117 @@
+{% extends "base.html" %}
+
+{% block title %}
+Customer History | Sales Management System
+{% endblock %}
+
+{% block content %}
+
+<div class="page-header">
+
+    <div>
+        <h1>Customer History</h1>
+        <p>View customer interactions and account history.</p>
+    </div>
+
+</div>
+
+
+<div class="form-card">
+
+    <h2>Customer History</h2>
+
+    <br>
+
+    <div style="overflow-x:auto;">
+
+        <table
+            style="
+                width:100%;
+                border-collapse:collapse;
+            "
+        >
+
+            <thead>
+
+                <tr>
+
+                    <th style="padding:12px; text-align:left;">
+                        Activity
+                    </th>
+
+                    <th style="padding:12px; text-align:left;">
+                        Subject
+                    </th>
+
+                    <th style="padding:12px; text-align:left;">
+                        Customer
+                    </th>
+
+                    <th style="padding:12px; text-align:left;">
+                        Date
+                    </th>
+
+                    <th style="padding:12px; text-align:left;">
+                        Status
+                    </th>
+
+                </tr>
+
+            </thead>
+
+
+            <tbody>
+
+                {% for activity in activities %}
+
+                <tr>
+
+                    <td style="padding:12px;">
+                        {{ activity.activity_type }}
+                    </td>
+
+                    <td style="padding:12px;">
+                        {{ activity.subject }}
+                    </td>
+
+                    <td style="padding:12px;">
+                        {{ activity.customer_id or "-" }}
+                    </td>
+
+                    <td style="padding:12px;">
+                        {{ activity.activity_date or "-" }}
+                    </td>
+
+                    <td style="padding:12px;">
+                        {{ activity.status }}
+                    </td>
+
+                </tr>
+
+                {% else %}
+
+                <tr>
+
+                    <td
+                        colspan="5"
+                        style="
+                            padding:25px;
+                            text-align:center;
+                        "
+                    >
+                        No customer history available.
+                    </td>
+
+                </tr>
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+{% endblock %}

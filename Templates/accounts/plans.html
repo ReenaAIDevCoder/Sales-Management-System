@@ -1,0 +1,130 @@
+{% extends "base.html" %}
+
+{% block title %}
+Account Plans | Sales Management System
+{% endblock %}
+
+{% block content %}
+
+<div class="page-header">
+
+    <div>
+
+        <h1>Account Plans</h1>
+
+        <p>
+            Manage strategic plans for customer accounts.
+        </p>
+
+    </div>
+
+</div>
+
+
+<div class="form-card">
+
+    <h2>Customer Account Plans</h2>
+
+    <br>
+
+    <div style="overflow-x:auto;">
+
+        <table
+            style="
+                width:100%;
+                border-collapse:collapse;
+            "
+        >
+
+            <thead>
+
+                <tr>
+
+                    <th style="padding:12px; text-align:left;">
+                        Customer
+                    </th>
+
+                    <th style="padding:12px; text-align:left;">
+                        Plan Name
+                    </th>
+
+                    <th style="padding:12px; text-align:left;">
+                        Objective
+                    </th>
+
+                    <th style="padding:12px; text-align:left;">
+                        Start Date
+                    </th>
+
+                    <th style="padding:12px; text-align:left;">
+                        End Date
+                    </th>
+
+                    <th style="padding:12px; text-align:left;">
+                        Status
+                    </th>
+
+                </tr>
+
+            </thead>
+
+
+            <tbody>
+
+                {% for plan in plans %}
+
+                <tr>
+
+                    <td style="padding:12px;">
+                        {{ plan.customer_id or "-" }}
+                    </td>
+
+                    <td style="padding:12px;">
+                        {{ plan.plan_name }}
+                    </td>
+
+                    <td style="padding:12px;">
+                        {{ plan.objective or "-" }}
+                    </td>
+
+                    <td style="padding:12px;">
+                        {{ plan.start_date or "-" }}
+                    </td>
+
+                    <td style="padding:12px;">
+                        {{ plan.end_date or "-" }}
+                    </td>
+
+                    <td style="padding:12px;">
+                        {{ plan.status }}
+                    </td>
+
+                </tr>
+
+                {% else %}
+
+                <tr>
+
+                    <td
+                        colspan="6"
+                        style="
+                            padding:25px;
+                            text-align:center;
+                        "
+                    >
+                        No account plans found.
+                    </td>
+
+                </tr>
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+{% endblock %}
