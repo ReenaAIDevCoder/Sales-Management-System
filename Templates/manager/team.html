@@ -1,0 +1,109 @@
+{% extends "base.html" %}
+
+{% block title %}
+Team Performance | Sales Management System
+{% endblock %}
+
+{% block content %}
+
+<div class="page-header">
+
+    <div>
+        <h1>Sales Team</h1>
+        <p>Monitor sales representatives and team performance.</p>
+    </div>
+
+</div>
+
+
+<div class="form-card">
+
+    <h2>Team Members</h2>
+
+    <br>
+
+    <div style="overflow-x:auto;">
+
+        <table
+            style="
+                width:100%;
+                border-collapse:collapse;
+            "
+        >
+
+            <thead>
+
+                <tr>
+
+                    <th style="padding:12px; text-align:left;">
+                        Name
+                    </th>
+
+                    <th style="padding:12px; text-align:left;">
+                        Email
+                    </th>
+
+                    <th style="padding:12px; text-align:left;">
+                        Role
+                    </th>
+
+                    <th style="padding:12px; text-align:left;">
+                        Region
+                    </th>
+
+                </tr>
+
+            </thead>
+
+
+            <tbody>
+
+                {% for member in team_members %}
+
+                <tr>
+
+                    <td style="padding:12px;">
+                        {{ member.name }}
+                    </td>
+
+                    <td style="padding:12px;">
+                        {{ member.email }}
+                    </td>
+
+                    <td style="padding:12px;">
+                        {{ member.role }}
+                    </td>
+
+                    <td style="padding:12px;">
+                        {{ member.region or "-" }}
+                    </td>
+
+                </tr>
+
+                {% else %}
+
+                <tr>
+
+                    <td
+                        colspan="4"
+                        style="
+                            padding:25px;
+                            text-align:center;
+                        "
+                    >
+                        No team members found.
+                    </td>
+
+                </tr>
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+{% endblock %}

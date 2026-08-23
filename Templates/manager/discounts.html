@@ -1,0 +1,136 @@
+{% extends "base.html" %}
+
+{% block title %}
+Discount Requests | Sales Management System
+{% endblock %}
+
+{% block content %}
+
+<div class="page-header">
+
+    <div>
+
+        <h1>Discount Requests</h1>
+
+        <p>
+            Review and manage sales discount requests.
+        </p>
+
+    </div>
+
+</div>
+
+
+<div class="form-card">
+
+    <h2>Pending Discount Requests</h2>
+
+    <br>
+
+    <div style="overflow-x:auto;">
+
+        <table
+            style="
+                width:100%;
+                border-collapse:collapse;
+            "
+        >
+
+            <thead>
+
+                <tr>
+
+                    <th style="padding:12px; text-align:left;">
+                        Opportunity
+                    </th>
+
+                    <th style="padding:12px; text-align:left;">
+                        Requested Discount
+                    </th>
+
+                    <th style="padding:12px; text-align:left;">
+                        Reason
+                    </th>
+
+                    <th style="padding:12px; text-align:left;">
+                        Status
+                    </th>
+
+                    <th style="padding:12px; text-align:left;">
+                        Requested By
+                    </th>
+
+                </tr>
+
+            </thead>
+
+
+            <tbody>
+
+                {% for request_item in discount_requests %}
+
+                <tr>
+
+                    <td style="padding:12px;">
+
+                        {{ request_item.opportunity_id or "-" }}
+
+                    </td>
+
+
+                    <td style="padding:12px;">
+
+                        {{ request_item.discount_percentage or 0 }}%
+
+                    </td>
+
+
+                    <td style="padding:12px;">
+
+                        {{ request_item.reason or "-" }}
+
+                    </td>
+
+
+                    <td style="padding:12px;">
+
+                        {{ request_item.status }}
+
+                    </td>
+
+
+                    <td style="padding:12px;">
+
+                        {{ request_item.requested_by or "-" }}
+
+                    </td>
+
+                </tr>
+
+                {% else %}
+
+                <tr>
+
+                    <td
+                        colspan="5"
+                        style="
+                            padding:25px;
+                            text-align:center;
+                        "
+                    >
+                        No discount requests found.
+                    </td>
+
+                </tr>
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+{% endblock %}

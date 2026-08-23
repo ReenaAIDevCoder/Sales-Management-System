@@ -1,0 +1,123 @@
+{% extends "base.html" %}
+
+{% block title %}
+Territories | Sales Management System
+{% endblock %}
+
+{% block content %}
+
+<div class="page-header">
+
+    <div>
+        <h1>Sales Territories</h1>
+        <p>Manage regions and territory assignments.</p>
+    </div>
+
+</div>
+
+
+<div class="form-card">
+
+    <h2>Territory Overview</h2>
+
+    <br>
+
+    <div style="overflow-x:auto;">
+
+        <table
+            style="
+                width:100%;
+                border-collapse:collapse;
+            "
+        >
+
+            <thead>
+
+                <tr>
+
+                    <th style="padding:12px; text-align:left;">
+                        Territory
+                    </th>
+
+                    <th style="padding:12px; text-align:left;">
+                        Region
+                    </th>
+
+                    <th style="padding:12px; text-align:left;">
+                        Manager
+                    </th>
+
+                    <th style="padding:12px; text-align:left;">
+                        Sales Representative
+                    </th>
+
+                    <th style="padding:12px; text-align:left;">
+                        Status
+                    </th>
+
+                </tr>
+
+            </thead>
+
+
+            <tbody>
+
+                {% for territory in territories %}
+
+                <tr>
+
+                    <td style="padding:12px;">
+                        {{ territory.name }}
+                    </td>
+
+                    <td style="padding:12px;">
+                        {{ territory.region }}
+                    </td>
+
+                    <td style="padding:12px;">
+                        {{ territory.manager_id or "-" }}
+                    </td>
+
+                    <td style="padding:12px;">
+                        {{ territory.assigned_rep_id or "-" }}
+                    </td>
+
+                    <td style="padding:12px;">
+
+                        {% if territory.is_active %}
+                            Active
+                        {% else %}
+                            Inactive
+                        {% endif %}
+
+                    </td>
+
+                </tr>
+
+                {% else %}
+
+                <tr>
+
+                    <td
+                        colspan="5"
+                        style="
+                            padding:25px;
+                            text-align:center;
+                        "
+                    >
+                        No territories found.
+                    </td>
+
+                </tr>
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+{% endblock %}
