@@ -1,0 +1,232 @@
+{% extends "base.html" %}
+
+{% block title %}
+Sales Pipeline | Sales Management System
+{% endblock %}
+
+{% block content %}
+
+<div class="page-header">
+
+    <div>
+
+        <h1>Sales Pipeline</h1>
+
+        <p>
+            Track open opportunities and potential revenue.
+        </p>
+
+    </div>
+
+    <a
+        href="{{ url_for('opportunity.add_opportunity') }}"
+        class="btn btn-primary"
+    >
+        + Add Opportunity
+    </a>
+
+</div>
+
+
+<div class="dashboard-grid">
+
+    <!-- Open Opportunities -->
+
+    <div class="dashboard-card">
+
+        <div class="card-title">
+            Open Opportunities
+        </div>
+
+        <div class="card-value">
+            {{ opportunities|length }}
+        </div>
+
+    </div>
+
+
+    <!-- Total Pipeline -->
+
+    <div class="dashboard-card">
+
+        <div class="card-title">
+            Total Pipeline
+        </div>
+
+        <div class="card-value">
+
+            ₹{{ "{:,.2f}".format(
+                total_pipeline or 0
+            ) }}
+
+        </div>
+
+    </div>
+
+
+    <!-- Weighted Forecast -->
+
+    <div class="dashboard-card">
+
+        <div class="card-title">
+            Weighted Forecast
+        </div>
+
+        <div class="card-value">
+
+            ₹{{ "{:,.2f}".format(
+                weighted_forecast or 0
+            ) }}
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- Pipeline Table -->
+
+<div class="form-card">
+
+    <h2>Pipeline Opportunities</h2>
+
+    <br>
+
+    <div style="overflow-x:auto;">
+
+        <table
+            style="
+                width:100%;
+                border-collapse:collapse;
+            "
+        >
+
+            <thead>
+
+                <tr>
+
+                    <th style="padding:12px; text-align:left;">
+                        Opportunity
+                    </th>
+
+                    <th style="padding:12px; text-align:left;">
+                        Deal Value
+                    </th>
+
+                    <th style="padding:12px; text-align:left;">
+                        Probability
+                    </th>
+
+                    <th style="padding:12px; text-align:left;">
+                        Weighted Value
+                    </th>
+
+                    <th style="padding:12px; text-align:left;">
+                        Stage
+                    </th>
+
+                    <th style="padding:12px; text-align:left;">
+                        Expected Close
+                    </th>
+
+                    <th style="padding:12px; text-align:left;">
+                        Action
+                    </th>
+
+                </tr>
+
+            </thead>
+
+
+            <tbody>
+
+                {% for opportunity in opportunities %}
+
+                <tr>
+
+                    <td style="padding:12px;">
+                        {{ opportunity.name }}
+                    </td>
+
+
+                    <td style="padding:12px;">
+
+                        ₹{{ "{:,.2f}".format(
+                            opportunity.deal_value or 0
+                        ) }}
+
+                    </td>
+
+
+                    <td style="padding:12px;">
+
+                        {{ opportunity.probability or 0 }}%
+
+                    </td>
+
+
+                    <td style="padding:12px;">
+
+                        ₹{{ "{:,.2f}".format(
+                            (opportunity.deal_value or 0)
+                            *
+                            ((opportunity.probability or 0) / 100)
+                        ) }}
+
+                    </td>
+
+
+                    <td style="padding:12px;">
+                        {{ opportunity.stage }}
+                    </td>
+
+
+                    <td style="padding:12px;">
+                        {{ opportunity.expected_close_date or "-" }}
+                    </td>
+
+
+                    <td style="padding:12px;">
+
+                        <a
+                            href="{{ url_for(
+                                'opportunity.opportunity_detail',
+                                opportunity_id=opportunity.id
+                            ) }}"
+                            class="btn btn-primary"
+                        >
+                            View
+                        </a>
+
+                    </td>
+
+                </tr>
+
+                {% else %}
+
+                <tr>
+
+                    <td
+                        colspan="7"
+                        style="
+                            padding:25px;
+                            text-align:center;
+                        "
+                    >
+                        No open opportunities found.
+                    </td>
+
+                </tr>
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+{% endblock %}

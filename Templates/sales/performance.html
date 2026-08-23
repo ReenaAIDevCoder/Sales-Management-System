@@ -1,0 +1,146 @@
+{% extends "base.html" %}
+
+{% block title %}
+Sales Performance | Sales Management System
+{% endblock %}
+
+{% block content %}
+
+<div class="page-header">
+
+    <div>
+
+        <h1>Sales Performance</h1>
+
+        <p>
+            Monitor overall sales target achievement.
+        </p>
+
+    </div>
+
+</div>
+
+
+{% set achievement_percentage = (
+    (total_achieved / total_target) * 100
+    if total_target else 0
+) %}
+
+
+<div class="dashboard-grid">
+
+
+    <div class="dashboard-card">
+
+        <div class="card-title">
+            Total Target
+        </div>
+
+        <div class="card-value">
+
+            ₹{{ "{:,.2f}".format(
+                total_target or 0
+            ) }}
+
+        </div>
+
+    </div>
+
+
+    <div class="dashboard-card">
+
+        <div class="card-title">
+            Total Achieved
+        </div>
+
+        <div class="card-value">
+
+            ₹{{ "{:,.2f}".format(
+                total_achieved or 0
+            ) }}
+
+        </div>
+
+    </div>
+
+
+    <div class="dashboard-card">
+
+        <div class="card-title">
+            Remaining
+        </div>
+
+        <div class="card-value">
+
+            ₹{{ "{:,.2f}".format(
+                (total_target or 0)
+                -
+                (total_achieved or 0)
+            ) }}
+
+        </div>
+
+    </div>
+
+
+    <div class="dashboard-card">
+
+        <div class="card-title">
+            Achievement
+        </div>
+
+        <div class="card-value">
+
+            {{ "%.2f"|format(
+                achievement_percentage
+            ) }}%
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<div class="form-card">
+
+    <h2>Performance Overview</h2>
+
+    <br>
+
+    <div
+        style="
+            background:#e5e7eb;
+            height:24px;
+            border-radius:12px;
+            overflow:hidden;
+        "
+    >
+
+        <div
+            style="
+                width:{{ [achievement_percentage, 100]|min }}%;
+                background:#2563eb;
+                height:100%;
+                border-radius:12px;
+            "
+        ></div>
+
+    </div>
+
+
+    <p style="margin-top:15px;">
+
+        Sales achievement is currently
+        <strong>
+            {{ "%.2f"|format(
+                achievement_percentage
+            ) }}%
+        </strong>
+        of the total target.
+
+    </p>
+
+</div>
+
+{% endblock %}

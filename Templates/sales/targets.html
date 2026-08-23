@@ -1,0 +1,203 @@
+{% extends "base.html" %}
+
+{% block title %}
+Sales Targets | Sales Management System
+{% endblock %}
+
+{% block content %}
+
+<div class="page-header">
+
+    <div>
+        <h1>Sales Targets</h1>
+        <p>Monitor sales targets and achievement.</p>
+    </div>
+
+</div>
+
+
+<div class="dashboard-grid">
+
+    <div class="dashboard-card">
+
+        <div class="card-title">
+            Total Target
+        </div>
+
+        <div class="card-value">
+
+            ₹{{ "{:,.2f}".format(
+                targets | sum(attribute="target_amount")
+            ) }}
+
+        </div>
+
+    </div>
+
+
+    <div class="dashboard-card">
+
+        <div class="card-title">
+            Total Achieved
+        </div>
+
+        <div class="card-value">
+
+            ₹{{ "{:,.2f}".format(
+                targets | sum(attribute="achieved_amount")
+            ) }}
+
+        </div>
+
+    </div>
+
+
+    <div class="dashboard-card">
+
+        <div class="card-title">
+            Remaining Target
+        </div>
+
+        <div class="card-value">
+
+            ₹{{ "{:,.2f}".format(
+                (
+                    targets | sum(attribute="target_amount")
+                )
+                -
+                (
+                    targets | sum(attribute="achieved_amount")
+                )
+            ) }}
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<div class="form-card">
+
+    <h2>Target Details</h2>
+
+    <br>
+
+    <div style="overflow-x:auto;">
+
+        <table
+            style="width:100%; border-collapse:collapse;"
+        >
+
+            <thead>
+
+                <tr>
+
+                    <th style="padding:12px; text-align:left;">
+                        Period
+                    </th>
+
+                    <th style="padding:12px; text-align:left;">
+                        Target
+                    </th>
+
+                    <th style="padding:12px; text-align:left;">
+                        Achieved
+                    </th>
+
+                    <th style="padding:12px; text-align:left;">
+                        Remaining
+                    </th>
+
+                    <th style="padding:12px; text-align:left;">
+                        Achievement
+                    </th>
+
+                    <th style="padding:12px; text-align:left;">
+                        Start Date
+                    </th>
+
+                    <th style="padding:12px; text-align:left;">
+                        End Date
+                    </th>
+
+                </tr>
+
+            </thead>
+
+
+            <tbody>
+
+                {% for target in targets %}
+
+                <tr>
+
+                    <td style="padding:12px;">
+                        {{ target.target_period }}
+                    </td>
+
+                    <td style="padding:12px;">
+                        ₹{{ "{:,.2f}".format(
+                            target.target_amount or 0
+                        ) }}
+                    </td>
+
+                    <td style="padding:12px;">
+                        ₹{{ "{:,.2f}".format(
+                            target.achieved_amount or 0
+                        ) }}
+                    </td>
+
+                    <td style="padding:12px;">
+
+                        ₹{{ "{:,.2f}".format(
+                            (target.target_amount or 0)
+                            -
+                            (target.achieved_amount or 0)
+                        ) }}
+
+                    </td>
+
+                    <td style="padding:12px;">
+
+                        {{ target.achievement_percentage }}%
+
+                    </td>
+
+                    <td style="padding:12px;">
+                        {{ target.start_date or "-" }}
+                    </td>
+
+                    <td style="padding:12px;">
+                        {{ target.end_date or "-" }}
+                    </td>
+
+                </tr>
+
+                {% else %}
+
+                <tr>
+
+                    <td
+                        colspan="7"
+                        style="
+                            padding:25px;
+                            text-align:center;
+                        "
+                    >
+                        No sales targets found.
+                    </td>
+
+                </tr>
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+{% endblock %}
