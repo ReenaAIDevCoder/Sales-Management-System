@@ -1,0 +1,29 @@
+.form-card {
+    background: white;
+    padding: 28px;
+    border-radius: 10px;
+    box-shadow: 0 3px 15px rgba(0, 0, 0, 0.06);
+    max-width: 900px;
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.form-actions {
+    display: flex;
+    gap: 12px;
+    margin-top: 25px;
+}
+
+.btn-secondary {
+    background: #e5e7eb;
+    color: #111827;
+}
+
+.btn-danger {
+    background: #dc2626;
+    color: white;
+}
