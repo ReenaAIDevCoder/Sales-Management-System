@@ -1,0 +1,151 @@
+{% extends "base.html" %}
+
+{% block title %}
+Opportunities | Sales Management System
+{% endblock %}
+
+{% block content %}
+
+<div class="page-header">
+
+    <div>
+        <h1>Sales Opportunities</h1>
+        <p>Track deals, pipeline stages and potential revenue.</p>
+    </div>
+
+    <a
+        href="{{ url_for('opportunity.add_opportunity') }}"
+        class="btn btn-primary"
+    >
+        + Add Opportunity
+    </a>
+
+</div>
+
+
+<div class="form-card">
+
+    <div style="overflow-x:auto;">
+
+        <table
+            id="opportunityTable"
+            style="width:100%; border-collapse:collapse;"
+        >
+
+            <thead>
+
+                <tr>
+                    <th style="padding:12px; text-align:left;">
+                        Opportunity
+                    </th>
+
+                    <th style="padding:12px; text-align:left;">
+                        Deal Value
+                    </th>
+
+                    <th style="padding:12px; text-align:left;">
+                        Probability
+                    </th>
+
+                    <th style="padding:12px; text-align:left;">
+                        Stage
+                    </th>
+
+                    <th style="padding:12px; text-align:left;">
+                        Expected Close
+                    </th>
+
+                    <th style="padding:12px; text-align:left;">
+                        Status
+                    </th>
+
+                    <th style="padding:12px; text-align:left;">
+                        Action
+                    </th>
+                </tr>
+
+            </thead>
+
+
+            <tbody>
+
+                {% for opportunity in opportunities %}
+
+                <tr>
+
+                    <td style="padding:12px;">
+                        {{ opportunity.name }}
+                    </td>
+
+                    <td style="padding:12px;">
+                        ₹{{ "{:,.2f}".format(
+                            opportunity.deal_value or 0
+                        ) }}
+                    </td>
+
+                    <td style="padding:12px;">
+                        {{ opportunity.probability or 0 }}%
+                    </td>
+
+                    <td style="padding:12px;">
+                        {{ opportunity.stage }}
+                    </td>
+
+                    <td style="padding:12px;">
+                        {{ opportunity.expected_close_date or "-" }}
+                    </td>
+
+                    <td style="padding:12px;">
+                        {{ opportunity.status }}
+                    </td>
+
+                    <td style="padding:12px;">
+
+                        <a
+                            href="{{ url_for(
+                                'opportunity.opportunity_detail',
+                                opportunity_id=opportunity.id
+                            ) }}"
+                            class="btn btn-primary"
+                        >
+                            View
+                        </a>
+
+                        <a
+                            href="{{ url_for(
+                                'opportunity.edit_opportunity',
+                                opportunity_id=opportunity.id
+                            ) }}"
+                            class="btn btn-secondary"
+                        >
+                            Edit
+                        </a>
+
+                    </td>
+
+                </tr>
+
+                {% else %}
+
+                <tr>
+
+                    <td
+                        colspan="7"
+                        style="padding:20px; text-align:center;"
+                    >
+                        No opportunities found.
+                    </td>
+
+                </tr>
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+{% endblock %}

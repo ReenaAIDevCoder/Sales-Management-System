@@ -1,0 +1,243 @@
+{% extends "base.html" %}
+
+{% block title %}
+Add Opportunity | Sales Management System
+{% endblock %}
+
+{% block content %}
+
+<div class="page-header">
+
+    <div>
+        <h1>Add Opportunity</h1>
+        <p>Create a new sales opportunity.</p>
+    </div>
+
+</div>
+
+
+<div class="form-card">
+
+    <form
+        method="POST"
+        action="{{ url_for('opportunity.add_opportunity') }}"
+    >
+
+        <div class="form-row">
+
+            <div class="form-group">
+
+                <label for="name">
+                    Opportunity Name *
+                </label>
+
+                <input
+                    type="text"
+                    id="name"
+                    name="name"
+                    placeholder="e.g. CRM Enterprise Deal"
+                    required
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="customer_id">
+                    Customer ID
+                </label>
+
+                <input
+                    type="number"
+                    id="customer_id"
+                    name="customer_id"
+                    min="1"
+                    placeholder="Customer ID"
+                >
+
+            </div>
+
+        </div>
+
+
+        <div class="form-row">
+
+            <div class="form-group">
+
+                <label for="deal_value">
+                    Deal Value (₹)
+                </label>
+
+                <input
+                    type="number"
+                    id="deal_value"
+                    name="deal_value"
+                    min="0"
+                    step="0.01"
+                    placeholder="500000"
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="probability">
+                    Probability (%)
+                </label>
+
+                <input
+                    type="number"
+                    id="probability"
+                    name="probability"
+                    min="0"
+                    max="100"
+                    step="1"
+                    value="50"
+                >
+
+            </div>
+
+        </div>
+
+
+        <div class="form-row">
+
+            <div class="form-group">
+
+                <label for="stage">
+                    Sales Stage
+                </label>
+
+                <select
+                    id="stage"
+                    name="stage"
+                >
+
+                    <option value="Prospecting">
+                        Prospecting
+                    </option>
+
+                    <option value="Qualification">
+                        Qualification
+                    </option>
+
+                    <option value="Proposal">
+                        Proposal
+                    </option>
+
+                    <option value="Negotiation">
+                        Negotiation
+                    </option>
+
+                    <option value="Closed Won">
+                        Closed Won
+                    </option>
+
+                    <option value="Closed Lost">
+                        Closed Lost
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="expected_close_date">
+                    Expected Close Date
+                </label>
+
+                <input
+                    type="date"
+                    id="expected_close_date"
+                    name="expected_close_date"
+                >
+
+            </div>
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label for="status">
+                Opportunity Status
+            </label>
+
+            <select
+                id="status"
+                name="status"
+            >
+
+                <option value="Open">
+                    Open
+                </option>
+
+                <option value="Won">
+                    Won
+                </option>
+
+                <option value="Lost">
+                    Lost
+                </option>
+
+            </select>
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label for="notes">
+                Notes
+            </label>
+
+            <textarea
+                id="notes"
+                name="notes"
+                rows="5"
+                placeholder="Enter opportunity details..."
+            ></textarea>
+
+        </div>
+
+
+        <div class="forecast-preview">
+
+            <strong>
+                Weighted Forecast:
+            </strong>
+
+            ₹<span id="forecast_value">0.00</span>
+
+        </div>
+
+
+        <div class="form-actions">
+
+            <button
+                type="submit"
+                class="btn btn-primary"
+            >
+                Save Opportunity
+            </button>
+
+            <a
+                href="{{ url_for(
+                    'opportunity.list_opportunities'
+                ) }}"
+                class="btn btn-secondary"
+            >
+                Cancel
+            </a>
+
+        </div>
+
+    </form>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,244 @@
+{% extends "base.html" %}
+
+{% block title %}
+Edit Opportunity | Sales Management System
+{% endblock %}
+
+{% block content %}
+
+<div class="page-header">
+
+    <div>
+        <h1>Edit Opportunity</h1>
+        <p>Update sales opportunity information.</p>
+    </div>
+
+</div>
+
+
+<div class="form-card">
+
+    <form
+        method="POST"
+        action="{{ url_for(
+            'opportunity.edit_opportunity',
+            opportunity_id=opportunity.id
+        ) }}"
+    >
+
+        <div class="form-row">
+
+            <div class="form-group">
+
+                <label for="name">
+                    Opportunity Name *
+                </label>
+
+                <input
+                    type="text"
+                    id="name"
+                    name="name"
+                    value="{{ opportunity.name }}"
+                    required
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="customer_id">
+                    Customer ID
+                </label>
+
+                <input
+                    type="number"
+                    id="customer_id"
+                    name="customer_id"
+                    min="1"
+                    value="{{ opportunity.customer_id or '' }}"
+                >
+
+            </div>
+
+        </div>
+
+
+        <div class="form-row">
+
+            <div class="form-group">
+
+                <label for="deal_value">
+                    Deal Value (₹)
+                </label>
+
+                <input
+                    type="number"
+                    id="deal_value"
+                    name="deal_value"
+                    min="0"
+                    step="0.01"
+                    value="{{ opportunity.deal_value or 0 }}"
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="probability">
+                    Probability (%)
+                </label>
+
+                <input
+                    type="number"
+                    id="probability"
+                    name="probability"
+                    min="0"
+                    max="100"
+                    step="1"
+                    value="{{ opportunity.probability or 0 }}"
+                >
+
+            </div>
+
+        </div>
+
+
+        <div class="form-row">
+
+            <div class="form-group">
+
+                <label for="stage">
+                    Sales Stage
+                </label>
+
+                <select
+                    id="stage"
+                    name="stage"
+                >
+
+                    {% for stage in [
+                        "Prospecting",
+                        "Qualification",
+                        "Proposal",
+                        "Negotiation",
+                        "Closed Won",
+                        "Closed Lost"
+                    ] %}
+
+                    <option
+                        value="{{ stage }}"
+                        {% if opportunity.stage == stage %}
+                        selected
+                        {% endif %}
+                    >
+                        {{ stage }}
+                    </option>
+
+                    {% endfor %}
+
+                </select>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="expected_close_date">
+                    Expected Close Date
+                </label>
+
+                <input
+                    type="date"
+                    id="expected_close_date"
+                    name="expected_close_date"
+                    value="{% if opportunity.expected_close_date %}{{ opportunity.expected_close_date.strftime('%Y-%m-%d') }}{% endif %}"
+                >
+
+            </div>
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label for="status">
+                Opportunity Status
+            </label>
+
+            <select
+                id="status"
+                name="status"
+            >
+
+                {% for status in ["Open", "Won", "Lost"] %}
+
+                <option
+                    value="{{ status }}"
+                    {% if opportunity.status == status %}
+                    selected
+                    {% endif %}
+                >
+                    {{ status }}
+                </option>
+
+                {% endfor %}
+
+            </select>
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label for="notes">
+                Notes
+            </label>
+
+            <textarea
+                id="notes"
+                name="notes"
+                rows="5"
+            >{{ opportunity.notes or "" }}</textarea>
+
+        </div>
+
+
+        <div class="forecast-preview">
+
+            <strong>
+                Weighted Forecast:
+            </strong>
+
+            ₹<span id="forecast_value">0.00</span>
+
+        </div>
+
+
+        <div class="form-actions">
+
+            <button
+                type="submit"
+                class="btn btn-primary"
+            >
+                Update Opportunity
+            </button>
+
+            <a
+                href="{{ url_for(
+                    'opportunity.opportunity_detail',
+                    opportunity_id=opportunity.id
+                ) }}"
+                class="btn btn-secondary"
+            >
+                Cancel
+            </a>
+
+        </div>
+
+    </form>
+
+</div>
+
+{% endblock %}

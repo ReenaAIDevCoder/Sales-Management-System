@@ -1,0 +1,211 @@
+{% extends "base.html" %}
+
+{% block title %}
+Opportunity Details | Sales Management System
+{% endblock %}
+
+{% block content %}
+
+<div class="page-header">
+
+    <div>
+
+        <h1>
+            {{ opportunity.name }}
+        </h1>
+
+        <p>
+            Sales opportunity details and forecast.
+        </p>
+
+    </div>
+
+
+    <div>
+
+        <a
+            href="{{ url_for(
+                'opportunity.edit_opportunity',
+                opportunity_id=opportunity.id
+            ) }}"
+            class="btn btn-primary"
+        >
+            Edit Opportunity
+        </a>
+
+        <a
+            href="{{ url_for(
+                'opportunity.list_opportunities'
+            ) }}"
+            class="btn btn-secondary"
+        >
+            Back
+        </a>
+
+    </div>
+
+</div>
+
+
+<div class="dashboard-grid">
+
+    <div class="dashboard-card">
+
+        <div class="card-title">
+            Deal Value
+        </div>
+
+        <div class="card-value">
+            ₹{{ "{:,.2f}".format(
+                opportunity.deal_value or 0
+            ) }}
+        </div>
+
+    </div>
+
+
+    <div class="dashboard-card">
+
+        <div class="card-title">
+            Probability
+        </div>
+
+        <div class="card-value">
+            {{ opportunity.probability or 0 }}%
+        </div>
+
+    </div>
+
+
+    <div class="dashboard-card">
+
+        <div class="card-title">
+            Weighted Forecast
+        </div>
+
+        <div class="card-value">
+
+            ₹{{ "{:,.2f}".format(
+                (opportunity.deal_value or 0)
+                *
+                ((opportunity.probability or 0) / 100)
+            ) }}
+
+        </div>
+
+    </div>
+
+
+    <div class="dashboard-card">
+
+        <div class="card-title">
+            Status
+        </div>
+
+        <div class="card-value">
+            {{ opportunity.status }}
+        </div>
+
+    </div>
+
+</div>
+
+
+<div class="form-card">
+
+    <h2>Opportunity Information</h2>
+
+    <br>
+
+
+    <div class="form-row">
+
+        <div>
+
+            <strong>Opportunity Name</strong>
+
+            <p>
+                {{ opportunity.name }}
+            </p>
+
+        </div>
+
+
+        <div>
+
+            <strong>Customer ID</strong>
+
+            <p>
+                {{ opportunity.customer_id or "-" }}
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <div class="form-row">
+
+        <div>
+
+            <strong>Sales Stage</strong>
+
+            <p>
+                {{ opportunity.stage }}
+            </p>
+
+        </div>
+
+
+        <div>
+
+            <strong>Expected Close Date</strong>
+
+            <p>
+                {{ opportunity.expected_close_date or "-" }}
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <div class="form-row">
+
+        <div>
+
+            <strong>Status</strong>
+
+            <p>
+                {{ opportunity.status }}
+            </p>
+
+        </div>
+
+
+        <div>
+
+            <strong>Assigned To</strong>
+
+            <p>
+                {{ opportunity.assigned_to or "-" }}
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <div>
+
+        <strong>Notes</strong>
+
+        <p>
+            {{ opportunity.notes or "No notes available." }}
+        </p>
+
+    </div>
+
+</div>
+
+{% endblock %}
