@@ -1,0 +1,212 @@
+{% extends "base.html" %}
+
+{% block title %}
+Marketing Campaigns | Sales Management System
+{% endblock %}
+
+{% block content %}
+
+<div class="page-header">
+
+    <div>
+        <h1>Marketing Campaigns</h1>
+
+        <p>
+            Track campaigns, leads, conversions and revenue.
+        </p>
+    </div>
+
+</div>
+
+
+<div class="dashboard-grid">
+
+    <div class="dashboard-card">
+
+        <div class="card-title">
+            Total Campaigns
+        </div>
+
+        <div class="card-value">
+            {{ campaigns|length }}
+        </div>
+
+    </div>
+
+
+    <div class="dashboard-card">
+
+        <div class="card-title">
+            Total Leads
+        </div>
+
+        <div class="card-value">
+            {{ total_leads }}
+        </div>
+
+    </div>
+
+
+    <div class="dashboard-card">
+
+        <div class="card-title">
+            Qualified Leads
+        </div>
+
+        <div class="card-value">
+            {{ qualified_leads }}
+        </div>
+
+    </div>
+
+
+    <div class="dashboard-card">
+
+        <div class="card-title">
+            Revenue Generated
+        </div>
+
+        <div class="card-value">
+
+            ₹{{ "{:,.2f}".format(
+                total_revenue or 0
+            ) }}
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<div class="form-card">
+
+    <h2>Campaign Performance</h2>
+
+    <br>
+
+    <div style="overflow-x:auto;">
+
+        <table
+            style="
+                width:100%;
+                border-collapse:collapse;
+            "
+        >
+
+            <thead>
+
+                <tr>
+
+                    <th style="padding:12px; text-align:left;">
+                        Campaign
+                    </th>
+
+                    <th style="padding:12px; text-align:left;">
+                        Type
+                    </th>
+
+                    <th style="padding:12px; text-align:left;">
+                        Budget
+                    </th>
+
+                    <th style="padding:12px; text-align:left;">
+                        Leads
+                    </th>
+
+                    <th style="padding:12px; text-align:left;">
+                        Qualified
+                    </th>
+
+                    <th style="padding:12px; text-align:left;">
+                        Conversions
+                    </th>
+
+                    <th style="padding:12px; text-align:left;">
+                        Revenue
+                    </th>
+
+                    <th style="padding:12px; text-align:left;">
+                        Status
+                    </th>
+
+                </tr>
+
+            </thead>
+
+
+            <tbody>
+
+                {% for campaign in campaigns %}
+
+                <tr>
+
+                    <td style="padding:12px;">
+                        {{ campaign.name }}
+                    </td>
+
+                    <td style="padding:12px;">
+                        {{ campaign.campaign_type or "-" }}
+                    </td>
+
+                    <td style="padding:12px;">
+
+                        ₹{{ "{:,.2f}".format(
+                            campaign.budget or 0
+                        ) }}
+
+                    </td>
+
+                    <td style="padding:12px;">
+                        {{ campaign.leads_generated or 0 }}
+                    </td>
+
+                    <td style="padding:12px;">
+                        {{ campaign.qualified_leads or 0 }}
+                    </td>
+
+                    <td style="padding:12px;">
+                        {{ campaign.conversions or 0 }}
+                    </td>
+
+                    <td style="padding:12px;">
+
+                        ₹{{ "{:,.2f}".format(
+                            campaign.revenue_generated or 0
+                        ) }}
+
+                    </td>
+
+                    <td style="padding:12px;">
+                        {{ campaign.status }}
+                    </td>
+
+                </tr>
+
+                {% else %}
+
+                <tr>
+
+                    <td
+                        colspan="8"
+                        style="
+                            padding:25px;
+                            text-align:center;
+                        "
+                    >
+                        No campaigns found.
+                    </td>
+
+                </tr>
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+{% endblock %}

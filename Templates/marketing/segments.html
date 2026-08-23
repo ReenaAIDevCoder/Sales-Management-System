@@ -1,0 +1,173 @@
+{% extends "base.html" %}
+
+{% block title %}
+Customer Segments | Sales Management System
+{% endblock %}
+
+{% block content %}
+
+<div class="page-header">
+
+    <div>
+
+        <h1>Customer Segments</h1>
+
+        <p>
+            Analyze customers by industry, location and status.
+        </p>
+
+    </div>
+
+</div>
+
+
+<div class="dashboard-grid">
+
+    <div class="dashboard-card">
+
+        <div class="card-title">
+            Total Customers
+        </div>
+
+        <div class="card-value">
+            {{ customers|length }}
+        </div>
+
+    </div>
+
+
+    <div class="dashboard-card">
+
+        <div class="card-title">
+            Active Customers
+        </div>
+
+        <div class="card-value">
+            {{ active_customers }}
+        </div>
+
+    </div>
+
+
+    <div class="dashboard-card">
+
+        <div class="card-title">
+            Industries
+        </div>
+
+        <div class="card-value">
+            {{ industries|length }}
+        </div>
+
+    </div>
+
+</div>
+
+
+<div class="form-card">
+
+    <h2>Customer Segmentation</h2>
+
+    <br>
+
+    <div style="overflow-x:auto;">
+
+        <table
+            style="
+                width:100%;
+                border-collapse:collapse;
+            "
+        >
+
+            <thead>
+
+                <tr>
+
+                    <th style="padding:12px; text-align:left;">
+                        Customer
+                    </th>
+
+                    <th style="padding:12px; text-align:left;">
+                        Company
+                    </th>
+
+                    <th style="padding:12px; text-align:left;">
+                        Industry
+                    </th>
+
+                    <th style="padding:12px; text-align:left;">
+                        City
+                    </th>
+
+                    <th style="padding:12px; text-align:left;">
+                        State
+                    </th>
+
+                    <th style="padding:12px; text-align:left;">
+                        Status
+                    </th>
+
+                </tr>
+
+            </thead>
+
+
+            <tbody>
+
+                {% for customer in customers %}
+
+                <tr>
+
+                    <td style="padding:12px;">
+                        {{ customer.name }}
+                    </td>
+
+                    <td style="padding:12px;">
+                        {{ customer.company or "-" }}
+                    </td>
+
+                    <td style="padding:12px;">
+                        {{ customer.industry or "-" }}
+                    </td>
+
+                    <td style="padding:12px;">
+                        {{ customer.city or "-" }}
+                    </td>
+
+                    <td style="padding:12px;">
+                        {{ customer.state or "-" }}
+                    </td>
+
+                    <td style="padding:12px;">
+                        {{ customer.status }}
+                    </td>
+
+                </tr>
+
+                {% else %}
+
+                <tr>
+
+                    <td
+                        colspan="6"
+                        style="
+                            padding:25px;
+                            text-align:center;
+                        "
+                    >
+                        No customer data available.
+                    </td>
+
+                </tr>
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,193 @@
+{% extends "base.html" %}
+
+{% block title %}
+Sales Marketing Collaboration | Sales Management System
+{% endblock %}
+
+{% block content %}
+
+<div class="page-header">
+
+    <div>
+
+        <h1>Sales & Marketing Collaboration</h1>
+
+        <p>
+            Compare marketing leads with sales opportunities and conversions.
+        </p>
+
+    </div>
+
+</div>
+
+
+<div class="dashboard-grid">
+
+    <div class="dashboard-card">
+
+        <div class="card-title">
+            Marketing Leads
+        </div>
+
+        <div class="card-value">
+            {{ total_leads }}
+        </div>
+
+    </div>
+
+
+    <div class="dashboard-card">
+
+        <div class="card-title">
+            Qualified Leads
+        </div>
+
+        <div class="card-value">
+            {{ qualified_leads }}
+        </div>
+
+    </div>
+
+
+    <div class="dashboard-card">
+
+        <div class="card-title">
+            Sales Opportunities
+        </div>
+
+        <div class="card-value">
+            {{ total_opportunities }}
+        </div>
+
+    </div>
+
+
+    <div class="dashboard-card">
+
+        <div class="card-title">
+            Won Opportunities
+        </div>
+
+        <div class="card-value">
+            {{ won_opportunities }}
+        </div>
+
+    </div>
+
+</div>
+
+
+<div class="form-card">
+
+    <h2>Collaboration Summary</h2>
+
+    <br>
+
+    <div style="overflow-x:auto;">
+
+        <table
+            style="
+                width:100%;
+                border-collapse:collapse;
+            "
+        >
+
+            <thead>
+
+                <tr>
+
+                    <th style="padding:12px; text-align:left;">
+                        Metric
+                    </th>
+
+                    <th style="padding:12px; text-align:left;">
+                        Value
+                    </th>
+
+                    <th style="padding:12px; text-align:left;">
+                        Description
+                    </th>
+
+                </tr>
+
+            </thead>
+
+
+            <tbody>
+
+                <tr>
+
+                    <td style="padding:12px;">
+                        Total Marketing Leads
+                    </td>
+
+                    <td style="padding:12px;">
+                        {{ total_leads }}
+                    </td>
+
+                    <td style="padding:12px;">
+                        Leads generated through marketing activities.
+                    </td>
+
+                </tr>
+
+
+                <tr>
+
+                    <td style="padding:12px;">
+                        Qualified Leads
+                    </td>
+
+                    <td style="padding:12px;">
+                        {{ qualified_leads }}
+                    </td>
+
+                    <td style="padding:12px;">
+                        Leads qualified for sales follow-up.
+                    </td>
+
+                </tr>
+
+
+                <tr>
+
+                    <td style="padding:12px;">
+                        Sales Opportunities
+                    </td>
+
+                    <td style="padding:12px;">
+                        {{ total_opportunities }}
+                    </td>
+
+                    <td style="padding:12px;">
+                        Opportunities created by the sales team.
+                    </td>
+
+                </tr>
+
+
+                <tr>
+
+                    <td style="padding:12px;">
+                        Won Opportunities
+                    </td>
+
+                    <td style="padding:12px;">
+                        {{ won_opportunities }}
+                    </td>
+
+                    <td style="padding:12px;">
+                        Successfully converted sales opportunities.
+                    </td>
+
+                </tr>
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+{% endblock %}
