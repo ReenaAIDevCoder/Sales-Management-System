@@ -1,0 +1,263 @@
+{% extends "base.html" %}
+
+{% block title %}
+Add Activity | Sales Management System
+{% endblock %}
+
+{% block content %}
+
+<div class="page-header">
+
+    <div>
+
+        <h1>Add Sales Activity</h1>
+
+        <p>
+            Record a call, meeting, email or follow-up.
+        </p>
+
+    </div>
+
+</div>
+
+
+<div class="form-card">
+
+    <form
+        method="POST"
+        action="{{ url_for('activity.add_activity') }}"
+    >
+
+        <div class="form-row">
+
+            <div class="form-group">
+
+                <label for="activity_type">
+                    Activity Type *
+                </label>
+
+                <select
+                    id="activity_type"
+                    name="activity_type"
+                    required
+                >
+
+                    <option value="">
+                        Select activity type
+                    </option>
+
+                    <option value="Call">
+                        Call
+                    </option>
+
+                    <option value="Meeting">
+                        Meeting
+                    </option>
+
+                    <option value="Email">
+                        Email
+                    </option>
+
+                    <option value="Follow-up">
+                        Follow-up
+                    </option>
+
+                    <option value="Visit">
+                        Customer Visit
+                    </option>
+
+                    <option value="Other">
+                        Other
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="subject">
+                    Subject *
+                </label>
+
+                <input
+                    type="text"
+                    id="subject"
+                    name="subject"
+                    placeholder="Enter activity subject"
+                    required
+                >
+
+            </div>
+
+        </div>
+
+
+        <div class="form-row">
+
+            <div class="form-group">
+
+                <label for="user_id">
+                    User ID
+                </label>
+
+                <input
+                    type="number"
+                    id="user_id"
+                    name="user_id"
+                    min="1"
+                    placeholder="Sales representative ID"
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="customer_id">
+                    Customer ID
+                </label>
+
+                <input
+                    type="number"
+                    id="customer_id"
+                    name="customer_id"
+                    min="1"
+                    placeholder="Customer ID"
+                >
+
+            </div>
+
+        </div>
+
+
+        <div class="form-row">
+
+            <div class="form-group">
+
+                <label for="opportunity_id">
+                    Opportunity ID
+                </label>
+
+                <input
+                    type="number"
+                    id="opportunity_id"
+                    name="opportunity_id"
+                    min="1"
+                    placeholder="Opportunity ID"
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="activity_date">
+                    Activity Date & Time *
+                </label>
+
+                <input
+                    type="datetime-local"
+                    id="activity_date"
+                    name="activity_date"
+                    required
+                >
+
+            </div>
+
+        </div>
+
+
+        <div class="form-row">
+
+            <div class="form-group">
+
+                <label for="duration_minutes">
+                    Duration (Minutes)
+                </label>
+
+                <input
+                    type="number"
+                    id="duration_minutes"
+                    name="duration_minutes"
+                    min="0"
+                    placeholder="30"
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="status">
+                    Status
+                </label>
+
+                <select
+                    id="status"
+                    name="status"
+                >
+
+                    <option value="Completed">
+                        Completed
+                    </option>
+
+                    <option value="Scheduled">
+                        Scheduled
+                    </option>
+
+                    <option value="Cancelled">
+                        Cancelled
+                    </option>
+
+                    <option value="Pending">
+                        Pending
+                    </option>
+
+                </select>
+
+            </div>
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label for="description">
+                Description
+            </label>
+
+            <textarea
+                id="description"
+                name="description"
+                rows="6"
+                placeholder="Enter details about the activity..."
+            ></textarea>
+
+        </div>
+
+
+        <div class="form-actions">
+
+            <button
+                type="submit"
+                class="btn btn-primary"
+            >
+                Save Activity
+            </button>
+
+            <a
+                href="{{ url_for('activity.list_activities') }}"
+                class="btn btn-secondary"
+            >
+                Cancel
+            </a>
+
+        </div>
+
+    </form>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,139 @@
+{% extends "base.html" %}
+
+{% block title %}
+Activities | Sales Management System
+{% endblock %}
+
+{% block content %}
+
+<div class="page-header">
+
+    <div>
+        <h1>Sales Activities</h1>
+        <p>
+            Track calls, meetings, emails and follow-up activities.
+        </p>
+    </div>
+
+    <a
+        href="{{ url_for('activity.add_activity') }}"
+        class="btn btn-primary"
+    >
+        + Add Activity
+    </a>
+
+</div>
+
+
+<div class="form-card">
+
+    <div style="overflow-x:auto;">
+
+        <table
+            style="width:100%; border-collapse:collapse;"
+        >
+
+            <thead>
+
+                <tr>
+
+                    <th style="padding:12px; text-align:left;">
+                        Type
+                    </th>
+
+                    <th style="padding:12px; text-align:left;">
+                        Subject
+                    </th>
+
+                    <th style="padding:12px; text-align:left;">
+                        Date
+                    </th>
+
+                    <th style="padding:12px; text-align:left;">
+                        Duration
+                    </th>
+
+                    <th style="padding:12px; text-align:left;">
+                        Status
+                    </th>
+
+                    <th style="padding:12px; text-align:left;">
+                        Customer
+                    </th>
+
+                    <th style="padding:12px; text-align:left;">
+                        Opportunity
+                    </th>
+
+                </tr>
+
+            </thead>
+
+
+            <tbody>
+
+                {% for activity in activities %}
+
+                <tr>
+
+                    <td style="padding:12px;">
+                        {{ activity.activity_type }}
+                    </td>
+
+                    <td style="padding:12px;">
+                        {{ activity.subject }}
+                    </td>
+
+                    <td style="padding:12px;">
+                        {{ activity.activity_date or "-" }}
+                    </td>
+
+                    <td style="padding:12px;">
+                        {% if activity.duration_minutes %}
+                            {{ activity.duration_minutes }} min
+                        {% else %}
+                            -
+                        {% endif %}
+                    </td>
+
+                    <td style="padding:12px;">
+                        {{ activity.status }}
+                    </td>
+
+                    <td style="padding:12px;">
+                        {{ activity.customer_id or "-" }}
+                    </td>
+
+                    <td style="padding:12px;">
+                        {{ activity.opportunity_id or "-" }}
+                    </td>
+
+                </tr>
+
+                {% else %}
+
+                <tr>
+
+                    <td
+                        colspan="7"
+                        style="
+                            padding:25px;
+                            text-align:center;
+                        "
+                    >
+                        No activities found.
+                    </td>
+
+                </tr>
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+{% endblock %}
